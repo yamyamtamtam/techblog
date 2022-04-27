@@ -1,7 +1,7 @@
 <template>
 <header>
-  <h1><router-link to="/">技術等メモブログ</router-link></h1>
-  <p>ちょっとずつモダンなWeb技術を習得していきたいブログ</p>
+  <h1><router-link to="/">地道にWeb技術を習得していきたい記録</router-link></h1>
+  <p>ちょっとずつ地道にモダンな技術習得をしていきます。</p>
 </header>
 </template>
 

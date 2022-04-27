@@ -58,11 +58,12 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .wrap{ width:90%; margin:0 auto; }
-  article{ width:100%; margin:0 0 30px 30px; }
-  article:nth-of-type(3n){ margin:0 0 30px 0; }
+  article{ width:100%; margin:0; }
   h2{ margin:0; font-size:1.4rem; }
-  p{ margin:15px 0; font-size:0.8rem; }
-  a{ display:block; width:100%; padding:10px 0; background:#333; color:#FFF; font-size:1rem; text-align:center; text-decoration:none; font-weight:bold; }
+  .post-content >>> p{ margin:15px 0; font-size:1.0rem; line-height:2; letter-spacing:1.0; }
+  .post-content >>> img{ max-width:100%; height:auto; }
+  .post-content >>> a{  }
+  .post-content >>> pre code{ display:block; width:100%; background:#333; color:#FFF; padding:20px; box-sizing:border-box; }
   .loader,
   .loader:before,
   .loader:after {

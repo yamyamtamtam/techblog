@@ -7,7 +7,7 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView,
-    meta: { title: '技術等メモブログ', description: 'ちょっとずつモダンなWeb技術を習得していきたいブログ' }
+    meta: { title: '地道にWeb技術を習得していきたい記録', description: '地道にWeb技術を習得していきたい記録' }
   },
   {
     path: '/about',
@@ -21,7 +21,7 @@ const routes = [
     path: '/post/:id',
     name: 'post',
     component: PostView,
-    meta: { title: '技術等メモブログ', description: 'ちょっとずつモダンなWeb技術を習得していきたいブログ' },
+    meta: { title: '地道にWeb技術を習得していきたい記録', description: '地道にWeb技術を習得していきたい記録' },
   }
 ]
 
