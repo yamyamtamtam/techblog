@@ -1,7 +1,7 @@
 <template>
 <header>
   <h1><router-link to="/">地道にWeb技術を習得していきたい記録</router-link></h1>
-  <p>ちょっとずつ地道にモダンな技術習得をしていきます。</p>
+  <p>ちょっとずつ地道に技術習得をしていきます。</p>
 </header>
 </template>
 

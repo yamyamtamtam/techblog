@@ -2,9 +2,13 @@
   <Meta></Meta>
   <div v-show="loading" class="loader"></div>
   <div class="wrap">
+    <Search></Search>
     <article v-for="post in posts" :key="post.id">
       <h2>{{ post.title }}</h2>
       <p>投稿日:{{ post.date }}</p>
+      <ul class="category">
+        <li v-for="category in post.cat" :key="category.id">{{ category.name }}</li>
+      </ul>
       <router-link v-bind:to="post.link">記事を読む</router-link>
     </article>
   </div>
@@ -13,10 +17,12 @@
 <script>
 import axios from 'axios'
 import Meta from './Meta.vue'
+import Search from './Search.vue'
 export default {
   name: 'ToppageComponent',
   components: {
-    Meta
+    Meta,
+    Search
   },
   data() {
     return{
@@ -24,7 +30,7 @@ export default {
       loading:true
     };
   },
-  created: function(){
+  created(){
     this.postList();
   },
   methods: {
@@ -32,18 +38,23 @@ export default {
       let vuedata = this;
       vuedata.posts = [];
       axios
-      .get('http://localhost:8888/techblog/wp/wp-json/wp/v2/posts/')
+      .get('http://localhost:8888/techblog/wp/wp-json/wp/v2/posts?context=embed')
       .then(function(response){
         vuedata.loading = false;
         for(let i = 0; i <= response.data.length; i++){
           //console.log(response.data[i]);
           let postDateObj = new Date(response.data[i].date);
+          let catDatas = [];
+          for(let k = 0; k < response.data[i].cat_info.length; k++){
+            catDatas.push(response.data[i].cat_info[k]);
+          }
           vuedata.posts.push(
             {
               id : response.data[i].id,
               title : response.data[i].title.rendered,
               link : '/post/' + response.data[i].id,
-              date : postDateObj.getFullYear() + '年' + (postDateObj.getMonth() + 1) + '月' + postDateObj.getDate() + '日'
+              date : postDateObj.getFullYear() + '年' + (postDateObj.getMonth() + 1) + '月' + postDateObj.getDate() + '日',
+              cat : catDatas
             }
           )
         }
@@ -51,6 +62,7 @@ export default {
       .catch(function(error) {
         console.log(error);
       });
+      console.log(vuedata.posts);
 
     }
   }
@@ -65,6 +77,8 @@ export default {
   h2{ margin:0; font-size:1.4rem; }
   p{ margin:15px 0; font-size:0.8rem; }
   a{ display:block; width:100%; padding:10px 0; background:#333; color:#FFF; font-size:1rem; text-align:center; text-decoration:none; font-weight:bold; }
+  .category{ display:flex; jusitfy-content:flex-start; flex-wrap:wrap; margin:0 0 10px; padding:0; }
+  .category li{ list-style-type:none; background:#FFF; color:#333; font-size:11px; border:1px solid #AAA; border-radius:10px; padding:2px 8px; margin:0 5px 5px 0; }
   .loader,
   .loader:before,
   .loader:after {

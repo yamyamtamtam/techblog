@@ -2,9 +2,13 @@
   <Meta v-bind:pageTitle="title"></Meta>
   <div v-show="loading" class="loader"></div>
   <div class="wrap">
+    <Search></Search>
     <article>
       <h2>{{ title }}</h2>
-      <p>投稿日:{{ date }}</p>
+      <p class="date">投稿日:{{ date }}</p>
+      <ul class="category">
+        <li v-for="category in cat" :key="category.id">{{ category.name }}</li>
+      </ul>
       <div class="post-content" v-html="content"></div>
     </article>
   </div>
@@ -13,10 +17,12 @@
 <script>
 import axios from 'axios'
 import Meta from './Meta.vue'
+import Search from './Search.vue'
 export default {
   name: 'PostComponent',
   components: {
-    Meta
+    Meta,
+    Search
   },
   emits: [ 'pageTitle' ],
   data() {
@@ -24,6 +30,7 @@ export default {
       title : '',
       content : '',
       date : '',
+      cat : [],
       loading:true
     };
   },
@@ -41,6 +48,9 @@ export default {
         vuedata.loading = false;
         let postDateObj = new Date(response.data.date);
         //console.log(response.data);
+        for(let i = 0; i < response.data.cat_info.length; i++){
+          vuedata.cat.push(response.data.cat_info[i]);
+        }
         vuedata.title = response.data.title.rendered,
         vuedata.content = response.data.content.rendered,
         vuedata.date = postDateObj.getFullYear() + '年' + (postDateObj.getMonth() + 1) + '月' + postDateObj.getDate() + '日'
@@ -49,8 +59,8 @@ export default {
       .catch(function(error) {
         console.log(error);
       });
-
     }
+
   }
 }
 </script>
@@ -59,11 +69,19 @@ export default {
 <style scoped>
   .wrap{ width:90%; margin:0 auto; }
   article{ width:100%; margin:0; }
-  h2{ margin:0; font-size:1.4rem; }
-  .post-content >>> p{ margin:15px 0; font-size:1.0rem; line-height:2; letter-spacing:1.0; }
+  h2{ margin:0; font-size:1.6rem; }
+  .date{ font-size:0.9rem; }
+  .category{ display:flex; jusitfy-content:flex-start; flex-wrap:wrap; margin:0; padding:0; }
+  .category li{ list-style-type:none; background:#FFF; color:#333; font-size:11px; border:1px solid #AAA; border-radius:10px; padding:2px 8px; margin:0 5px 5px 0; }
+  .post-content >>> h3{ margin:40px 0 20px; font-size:1.1rem; line-height:2; letter-spacing:1px; border-bottom:1px solid #333; }
+  .post-content >>> h4{ border-left:2px solid #333; padding:0 0 0 10px; margin:20px 0; }
+  .post-content >>> h5{ background:#DDD; padding:5px 10px; margin:20px 0 0; }
+  .post-content >>> p{ margin:0; font-size:1.0rem; line-height:1.8; letter-spacing:0.1px; }
+  .post-content >>> ul li{ margin:0; font-size:1.0rem; line-height:1.8; letter-spacing:0.3px; }
   .post-content >>> img{ max-width:100%; height:auto; }
   .post-content >>> a{  }
-  .post-content >>> pre code{ display:block; width:100%; background:#333; color:#FFF; padding:20px; box-sizing:border-box; }
+  .post-content >>> pre{ margin:0 0 40px; } 
+  .post-content >>> pre code{ display:block; width:100%; font-size:0.8rem; background:#333; color:#FFF; padding:20px; box-sizing:border-box; overflow:scroll; }
   .loader,
   .loader:before,
   .loader:after {
