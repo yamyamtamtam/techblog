@@ -3,7 +3,7 @@
   <div v-else v-on:click="SearchOpen" class="searchButton"></div>
   <div v-if="seachWindow" class="searchWindow">
     <div class="inner">
-      <input v-model="searchText" v-on:input="searchStart" class="search" type="text">
+      <input v-model="searchText" v-on:input="searchStart" class="search" type="text" placeholder="キーワードを入力">
       <div v-show="loading" class="loader"></div>
       <div v-if="exist" v-show="!loading">
         <article v-for="post in posts" :key="post.id">
@@ -32,7 +32,7 @@ export default {
       loading: false,
       seachWindow: false,
       searchText: '',
-      exist: true,
+      exist: true
     };
   },
   methods: {
@@ -42,7 +42,7 @@ export default {
       let vuedata = this;
       setTimeout(function(){ //2秒入力がない場合だけ検索する（１文字打つごとに検索されるのを防止）
         if(currentWord === vuedata.searchText){
-          console.log(currentWord);
+          //console.log(currentWord);
           vuedata.loading = false;
           vuedata.posts = [];
           let forApi = 'http://localhost:8888/techblog/wp/wp-json/wp/v2/posts/?search=' + vuedata.searchText;
@@ -97,7 +97,7 @@ export default {
     100%{ opacity:100%; }
   }
   .inner{ width:95vw; margin:10% auto; overflow-y:scroll; }
-  input{ width:100%;  padding:15px 10px; font-size:18px; }
+  input{ width:100%;  padding:15px 10px; font-size:18px; overflow:initial; }
   article{ width:100%; border:1px solid #CCC; margin:30px 0 0; padding:30px; box-sizing:border-box; background:#FFF; }
   article:nth-of-type(3n){ margin:0 0 30px 0; }
   h2{ margin:0; font-size:1.4rem; }

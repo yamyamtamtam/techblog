@@ -31,11 +31,17 @@ export default {
       content : '',
       date : '',
       cat : [],
-      loading:true
+      loading : true
     };
   },
   created() {
     this.postContent();
+  },
+  watch: {
+    '$route' () {
+      this.postContent();
+      location.reload();
+    }
   },
   methods: {
     postContent(){
