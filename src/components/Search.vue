@@ -45,7 +45,7 @@ export default {
           //console.log(currentWord);
           vuedata.loading = false;
           vuedata.posts = [];
-          let forApi = 'http://localhost:8888/techblog/wp/wp-json/wp/v2/posts/?search=' + vuedata.searchText;
+          let forApi = 'https://yamyamtamtam.tech/wp/wp-json/wp/v2/posts/?search=' + vuedata.searchText;
           axios
           .get(forApi)
           .then(function(response){
@@ -105,7 +105,7 @@ export default {
   a{ display:block; width:100%; padding:10px 0; background:#333; color:#FFF; font-size:1rem; text-align:center; text-decoration:none; font-weight:bold; }
   .category{ display:flex; jusitfy-content:flex-start; flex-wrap:wrap; margin:0 0 10px; padding:0; }
   .category li{ list-style-type:none; background:#FFF; color:#333; font-size:11px; border:1px solid #AAA; border-radius:10px; padding:2px 8px; margin:0 5px 5px 0; }
-  .closeButton{ position:fixed; top:30px; right:30px; z-index:100; font-size:48px; color:#FFF; font-weight:bold; cursor:pointer; }
+  .closeButton{ position:fixed; top:30px; right:30px; z-index:100; font-size:48px; color:#FFF; font-weight:bold; cursor:pointer; text-shadow:0 0 5px #000; }
   .searchNone{ font-size:18px; color:#FFF; margin:30px 0 0; }
   .loader,
   .loader:before,
@@ -187,7 +187,6 @@ export default {
 
   /*------スマホ--------*/
   @media screen and (max-width:767px){
-    article{ width:100%; margin:0 0 30px; }
-    article:nth-of-type(3n){ margin:0 0 0 0; }    
+    article{ width:100%; margin:30px 0 0; }
   } 
 </style>

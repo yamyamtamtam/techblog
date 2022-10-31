@@ -47,7 +47,7 @@ export default {
     postContent(){
       let vuedata = this;
       let forApi = this.$route.path;
-      forApi = 'http://localhost:8888/techblog/wp/wp-json/wp/v2/posts/' + forApi.replace('/post/','');
+      forApi = 'https://yamyamtamtam.tech/wp/wp-json/wp/v2/posts/' + forApi.replace('/post/','');
       axios
       .get(forApi)
       .then(function(response){

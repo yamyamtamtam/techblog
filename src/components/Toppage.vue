@@ -38,7 +38,7 @@ export default {
       let vuedata = this;
       vuedata.posts = [];
       axios
-      .get('http://localhost:8888/techblog/wp/wp-json/wp/v2/posts?context=embed')
+      .get('https://yamyamtamtam.tech/wp/wp-json/wp/v2/posts?context=embed&per_page=100')
       .then(function(response){
         vuedata.loading = false;
         for(let i = 0; i <= response.data.length; i++){
@@ -121,6 +121,5 @@ export default {
   /*------スマホ--------*/
   @media screen and (max-width:767px){
     article{ width:100%; margin:0 0 30px; }
-    article:nth-of-type(3n){ margin:0 0 0 0; }    
   } 
 </style>
