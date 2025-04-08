@@ -3,6 +3,7 @@
   <div v-show="loading" class="loader"></div>
   <div class="wrap">
     <Search></Search>
+    <Contacts></Contacts>
     <article v-for="post in posts" :key="post.id">
       <h2>{{ post.title }}</h2>
       <p>投稿日:{{ post.date }}</p>
@@ -18,11 +19,13 @@
 import axios from 'axios'
 import Meta from './Meta.vue'
 import Search from './Search.vue'
+import Contacts from './Contacts.vue'
 export default {
   name: 'ToppageComponent',
   components: {
     Meta,
-    Search
+    Search,
+    Contacts
   },
   data() {
     return{
@@ -38,7 +41,7 @@ export default {
       let vuedata = this;
       vuedata.posts = [];
       axios
-      .get('https://yamyamtamtam.tech/wp/wp-json/wp/v2/posts?context=embed&per_page=100')
+      .get('https://api.yamyamtamtam.tech/wp-json/wp/v2/posts?context=embed&per_page=100')
       .then(function(response){
         vuedata.loading = false;
         for(let i = 0; i <= response.data.length; i++){
