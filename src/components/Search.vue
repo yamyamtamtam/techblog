@@ -45,7 +45,7 @@ export default {
           //console.log(currentWord);
           vuedata.loading = false;
           vuedata.posts = [];
-          let forApi = 'https://yamyamtamtam.tech/wp/wp-json/wp/v2/posts/?search=' + vuedata.searchText;
+          let forApi = 'https://api.yamyamtamtam.tech/wp-json/wp/v2/posts/?search=' + vuedata.searchText;
           axios
           .get(forApi)
           .then(function(response){
@@ -188,5 +188,8 @@ export default {
   /*------スマホ--------*/
   @media screen and (max-width:767px){
     article{ width:100%; margin:30px 0 0; }
+      .searchButton {
+      right:10px;
+    }
   } 
 </style>

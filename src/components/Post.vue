@@ -3,6 +3,7 @@
   <div v-show="loading" class="loader"></div>
   <div class="wrap">
     <Search></Search>
+    <Contacts></Contacts>
     <article>
       <h2>{{ title }}</h2>
       <p class="date">投稿日:{{ date }}</p>
@@ -18,11 +19,13 @@
 import axios from 'axios'
 import Meta from './Meta.vue'
 import Search from './Search.vue'
+import Contacts from './Contacts.vue'
 export default {
   name: 'PostComponent',
   components: {
     Meta,
-    Search
+    Search,
+    Contacts
   },
   emits: [ 'pageTitle' ],
   data() {
@@ -47,7 +50,7 @@ export default {
     postContent(){
       let vuedata = this;
       let forApi = this.$route.path;
-      forApi = 'https://yamyamtamtam.tech/wp/wp-json/wp/v2/posts/' + forApi.replace('/post/','');
+      forApi = 'https://api.yamyamtamtam.tech/wp-json/wp/v2/posts/' + forApi.replace('/post/','');
       axios
       .get(forApi)
       .then(function(response){
